@@ -5,11 +5,11 @@
 
 echo "Hello $USER, what are you committing?" && git add . && echo $?
 
-echo "What is you commit message?" && git commit -m "$*"  >> git_log && echo $?
+echo "What is you commit message?" && git commit -m "$*"  >> git-master.log && echo $?
 
-echo "Lets push this shit!" && git push origin main
+echo "Lets push this shit!" && git push origin master
 
 sleep  10s
 
-cat git_log
+grep master git-master.log
 
