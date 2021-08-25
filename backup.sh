@@ -6,17 +6,24 @@ LOGFILE=$1
 BACKUP_LOCATION="/usr/bin/"
 BACKUP_TARGET="/home/$USER/.backup"
 
-init (){
-				echo "Creating backup directory" && mkdir ~/.backup 2> /dev/null || echo "Directory already exists!!"
+init () {
+				echo "Creating backup directory" && mkdir $BACKUP_TARGET 2> /dev/null || echo "Directory already exists!!" 
+				echo "$(date +"%x %r %Z")" >> $LOGFILE 
 }
 
 tail () {
 				command tail -n $1
 }
 
+cleanup () {
+				rm -rf $BACKUP_TARGET
+				echo "RECIEVED CTRLC" >> /home/$USER/ShellScripts/$LOGFILE
+				exit 
+}
+
 init
 
-##echo "Copying Files...." && cp -v $BACKUP_LOCATION $BACKUP_TARGET >> $LOGFILE 2>&1
+trap cleanup SIGINT
 
 echo "Coping Files...."
 
