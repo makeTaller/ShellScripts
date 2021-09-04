@@ -1,14 +1,22 @@
 #!/bin/bash
 # Backing up files on system
 # Author: Kirk Tolliver
+# Working with python and linux networking to improve this script:
 
 LOGFILE=$1
 BACKUP_LOCATION="/usr/bin/"
 BACKUP_TARGET="/home/$USER/.backup"
 
 init () {
-				echo "Creating backup directory" && mkdir $BACKUP_TARGET 2> /dev/null || echo "Directory already exists!!" 
-				echo "$(date +"%x %r %Z")" >> $LOGFILE 
+				if [ -d $BACKUP_TARGET ]
+					then	
+							echo "Directory already exists!!" 
+							echo "$(date +"%x %r %Z")" >> $LOGFILE 
+							return 1
+					else
+						  mkdir $BACKUP_TARGET	
+							echo "$(date +"%x %r %Z")" >> $LOGFILE 
+				fi
 }
 
 tail () {
