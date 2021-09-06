@@ -1,5 +1,6 @@
 #!/bin/bash
 # While loop example
+# Adding a line here to commit to github
 # Author Kirk Tolliver
 # Wed Aug 25 07:59:40 AM CDT 2021
 
